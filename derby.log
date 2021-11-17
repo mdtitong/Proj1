@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Nov 12 01:21:46 EST 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-017d-12cf-2908-000013560e40 
-on database directory C:\Users\Erica\Desktop\Programming\AdvancedJavaPrograms\BahalagKapoy\metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@6629643d 
+Tue Nov 16 23:40:28 EST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-017d-2c32-36a1-000010ad22e8 
+on database directory C:\Users\Erica\Desktop\Programming\AdvancedJavaPrograms\Project1\metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@2b2a4332 
 Loaded from file:/C:/Users/Erica/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_261-b12
-user.dir=C:\Users\Erica\Desktop\Programming\AdvancedJavaPrograms\BahalagKapoy
+user.dir=C:\Users\Erica\Desktop\Programming\AdvancedJavaPrograms\Project1
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

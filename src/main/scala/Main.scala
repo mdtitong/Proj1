@@ -3,9 +3,10 @@ import org.apache.spark.sql.SparkSession
 
 object Main {
   def main(args: Array[String]): Unit = {
+    //main option (log-in, register)
+    MainOptions.mainOptions()
 
     System.setProperty("hadoop.home.dir", "C:\\hadoop")
-
     val spark = SparkSession
       .builder
       .appName("hello hive")
