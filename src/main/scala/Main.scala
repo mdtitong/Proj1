@@ -71,7 +71,17 @@ object Main {
       "(playerName STRING, prediction BIGINT) " +
       "ROW FORMAT DELIMITED FIELDS TERMINATED BY ','")
 
-    spark.sql(sqlText = "INSERT INTO TABLE problem6(select name, round(salary +\n\t(select salary*\n\t\t(select \n\t\t\t(select salary - \n\t\t\t\t(select salary as previous_sal \n\t\t\t\t from nbaTable \n\t\t\t\t where season = '2019' and name = 'LeBron James') as diff\n\t\t\t from nbaTable\n\t\t\t where season = '2020' and name = 'LeBron James')/salary\n\t\tfrom nbaTable\t\t\t\n\t\twhere season = '2019' and name = 'LeBron James')\t\nfrom nbaTable\nwhere season = '2020' and name = 'LeBron James'),0) as prediction\nfrom nbaTable\nwhere season = '2020' and name = 'LeBron James')")
+    spark.sql(sqlText = "INSERT INTO TABLE problem6(select name, round(salary +(select salary*(select " +
+      "(select salary - (select salary as previous_sal  from nbaTable" +
+      " where season = '2019' and name = 'LeBron James') as diff" +
+      " from nbaTable" +
+      " where season = '2020' and name = 'LeBron James')/salary" +
+      " from nbaTable" +
+      " where season = '2019' and name = 'LeBron James')" +
+      " from nbaTable" +
+      " where season = '2020' and name = 'LeBron James'),0) as prediction" +
+      " from nbaTable" +
+      " where season = '2020' and name = 'LeBron James')")
     spark.sql("SELECT * FROM problem6").show()
 
   }
