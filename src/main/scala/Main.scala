@@ -1,8 +1,12 @@
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
-
 
 object Main {
   def main(args: Array[String]): Unit = {
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+    Logger.getLogger("hive").setLevel(Level.OFF)
+
     //main option (log-in, register)
     MainOptions.mainOptions()
 
@@ -64,13 +68,11 @@ object Main {
     //6. Salary prediction for next season for the highest-earning NBA player
     spark.sql(sqlText = "DROP TABLE IF EXISTS problem6")
     spark.sql(sqlText = "CREATE TABLE IF NOT EXISTS problem6" +
-      "(playerName STRING, position STRING, team STRING, prediction BIGINT) " +
+      "(playerName STRING, prediction BIGINT) " +
       "ROW FORMAT DELIMITED FIELDS TERMINATED BY ','")
-    spark.sql(sqlText = "INSERT INTO TABLE problem6(select name, position, team, " +
-      "cast(round((((37436858-35654150)/35654150) * 37436858) + 37436858, 0) as int) as prediction " +
-      "from nbaTable where name = 'LeBron James' limit 1)")
-    spark.sql("SELECT * FROM problem6").show()
 
+    spark.sql(sqlText = "INSERT INTO TABLE problem6(select name, round(salary +\n\t(select salary*\n\t\t(select \n\t\t\t(select salary - \n\t\t\t\t(select salary as previous_sal \n\t\t\t\t from nbaTable \n\t\t\t\t where season = '2019' and name = 'LeBron James') as diff\n\t\t\t from nbaTable\n\t\t\t where season = '2020' and name = 'LeBron James')/salary\n\t\tfrom nbaTable\t\t\t\n\t\twhere season = '2019' and name = 'LeBron James')\t\nfrom nbaTable\nwhere season = '2020' and name = 'LeBron James'),0) as prediction\nfrom nbaTable\nwhere season = '2020' and name = 'LeBron James')")
+    spark.sql("SELECT * FROM problem6").show()
 
   }
 }
